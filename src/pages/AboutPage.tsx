@@ -40,17 +40,10 @@ export default function AboutPage() {
           </h1>
         </motion.div>
 
-        {/* Split — photo + intro */}
-        <div className="grid lg:grid-cols-[1fr_1.6fr] gap-12 mb-20 items-start">
-          <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}>
-            <div style={{ position: "relative", borderRadius: "14px", overflow: "hidden", border: "1px solid var(--border-color)" }}>
-              <div style={{ position: "absolute", inset: 0, background: "var(--gradient-1)", filter: "blur(50px)", opacity: 0.12, transform: "scale(1.1)", zIndex: -1 }} />
-              <img src="/profile.png" alt="Anamika Kumari" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", objectPosition: "center top", display: "block" }} />
-            </div>
-          </motion.div>
-
+        {/* Intro */}
+        <div className="mb-20">
           <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            style={{ display: "flex", flexDirection: "column", gap: "1.4rem" }}>
+            style={{ display: "flex", flexDirection: "column", gap: "1.4rem", maxWidth: "720px" }}>
 
             <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.1rem, 1.8vw, 1.3rem)", fontStyle: "italic", color: "var(--text-primary)", lineHeight: 1.75 }}>
               Final-year ECE (AI) at IGDTUW. I own things end-to-end — the frontend, the backend, the model, and the part where it actually has to work in production.

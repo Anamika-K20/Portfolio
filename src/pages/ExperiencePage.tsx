@@ -13,23 +13,23 @@ type Experience = {
   points: string[];
   tech: string[];
   link?: string;
+  certificate?: string;
 };
 
 const experiences: Experience[] = [
   {
-    role: "Machine Learning Intern",
+    role: "Technology Summer Analyst",
     company: "Citi Bank",
-    location: "Delhi, India",
-    period: "Jun 2024 – Aug 2024",
+    location: "Pune, Maharashtra",
+    period: "Jun 2025 – Jul 2025",
     type: "Internship",
     accentColor: "#67e8f9",
     points: [
-      "Built a production-grade RAG pipeline using LangChain and FAISS to enable semantic search over internal financial documents.",
-      "Reduced manual document retrieval time by ~60% by integrating vector embeddings with a FastAPI backend.",
-      "Worked with cross-functional teams to define retrieval accuracy benchmarks and iteratively improved chunking strategies.",
-      "Deployed the pipeline on internal infrastructure with monitoring for query latency and retrieval quality.",
+      "Built and deployed an enterprise-ready RAG pipeline using LLMs, PyMuPDF, and FAISS, integrated with Angular and FastAPI — reduced document processing time by 95% (days to hours) and currently in active organizational use.",
+      "Engineered a tree-based document parsing algorithm to enhance accuracy, scalability, and efficiency in automated form digitization, eliminating manual data entry and enabling seamless enterprise deployment.",
     ],
-    tech: ["LangChain", "FAISS", "FastAPI", "Python", "OpenAI API", "Vector Embeddings"],
+    tech: ["LLMs", "FAISS", "PyMuPDF", "FastAPI", "Angular", "Python", "RAG"],
+    certificate: "/internshipcompletioncertificate.pdf",
   },
   {
     role: "Research Intern",
@@ -176,6 +176,20 @@ export default function ExperiencePage() {
                       </span>
                     ))}
                   </div>
+
+                  {/* Certificate */}
+                  {exp.certificate && (
+                    <div style={{ marginTop: "1rem" }}>
+                      <a
+                        href={exp.certificate}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ display: "inline-flex", alignItems: "center", gap: "6px", fontFamily: "'Space Mono', monospace", fontSize: "0.48rem", letterSpacing: "0.1em", color: exp.accentColor, border: `1px solid ${exp.accentColor}44`, backgroundColor: exp.accentColor + "10", borderRadius: "8px", padding: "6px 14px", textDecoration: "none", textTransform: "uppercase" }}
+                      >
+                        <ExternalLink size={11} /> View Certificate
+                      </a>
+                    </div>
+                  )}
                 </motion.div>
               </motion.div>
             ))}
