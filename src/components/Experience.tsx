@@ -4,7 +4,7 @@ import { Briefcase, Calendar, MapPin, Zap } from "lucide-react";
 export const Experience = () => {
   const experiences = [
     {
-      company: "Citi Bank",
+      company: " ",
       position: "Summer Analyst",
       duration: "2 June 2025 – 25 July 2025",
       location: "Pune, Maharashtra",

@@ -12,7 +12,7 @@ const navItems = [
   { label: "Research", path: "/research" },
   { label: "Resume", path: "/resume" },
   { label: "Education", path: "/education" },
-  { label: "Extra-curricular", path: "/extracurricular" },
+  { label: "Positions of Responsibility", path: "/extracurricular" },
   { label: "Coding", path: "/coding" },
   { label: "Contact", path: "/contact" },
 ];

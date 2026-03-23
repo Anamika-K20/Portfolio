@@ -10,7 +10,6 @@ const skillCategories = [
       { name: "C++", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg", color: "#00568C" },
       { name: "Python", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", color: "#3776AB" },
       { name: "JavaScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", color: "#F7DF1E" },
-      { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", color: "#3178C6" },
       { name: "SQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg", color: "#336791" },
       { name: "HTML", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", color: "#E34C26" },
       { name: "CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg", color: "#563D7C" },
@@ -20,13 +19,12 @@ const skillCategories = [
     title: "Frameworks & Libraries",
     emoji: "🧩",
     skills: [
-      { name: "React", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", color: "#61DAFB" },
-      { name: "Angular", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg", color: "#DD0031" },
+      { name: "FastAPI", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg", color: "#009688" },
       { name: "Node.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", color: "#68A063" },
       { name: "Express.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg", color: "#888888" },
-      { name: "FastAPI", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg", color: "#009688" },
       { name: "Bootstrap", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg", color: "#7952B3" },
-      { name: "Tailwind", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg", color: "#38BDF8" },
+      { name: "Angular", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg", color: "#DD0031", note: "Beginner" },
+      { name: "FAISS", logo: "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/meta.svg", color: "#4F46E5" },
     ],
   },
   {
@@ -34,8 +32,8 @@ const skillCategories = [
     emoji: "🗄️",
     skills: [
       { name: "MongoDB", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg", color: "#13AA52" },
-      { name: "MySQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg", color: "#336791" },
       { name: "VS Code", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg", color: "#007ACC" },
+      { name: "Google Colab", logo: "https://colab.research.google.com/favicon.ico", color: "#F9AB00" },
       { name: "Git", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", color: "#F05032" },
       { name: "GitHub", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", color: "#888888" },
     ],
@@ -45,9 +43,7 @@ const skillCategories = [
     emoji: "🤖",
     skills: [
       { name: "TensorFlow", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg", color: "#FF6F00" },
-      { name: "FAISS", logo: "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/meta.svg", color: "#4F46E5" },
       { name: "Scikit-learn", logo: "https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg", color: "#F7931E" },
-      { name: "Google Colab", logo: "https://colab.research.google.com/favicon.ico", color: "#F9AB00" },
     ],
   },
 ];
@@ -110,6 +106,11 @@ export default function SkillsPage() {
                     <p className="text-xs font-bold text-center relative z-10" style={{ color: skill.color }}>
                       {skill.name}
                     </p>
+                    {(skill as any).note && (
+                      <p className="text-center relative z-10" style={{ fontSize: "0.4rem", letterSpacing: "0.08em", color: "var(--text-tertiary)", textTransform: "uppercase" }}>
+                        {(skill as any).note}
+                      </p>
+                    )}
                   </motion.div>
                 ))}
               </div>
