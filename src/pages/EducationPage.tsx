@@ -42,19 +42,14 @@ export default function EducationPage() {
   return (
     <PageLayout>
       <div className="max-w-4xl mx-auto px-4 py-16">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-14"
-        >
-          <p className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: `var(--accent-color)` }}>
-            ACADEMIC JOURNEY
+        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="mb-14">
+          <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.55rem", letterSpacing: "0.35em", color: "var(--accent-color)", textTransform: "uppercase", marginBottom: "0.8rem" }}>
+            Academic Journey
           </p>
-          <h1 className="text-4xl md:text-5xl font-bold flex items-center justify-center gap-3" style={{ color: `var(--accent-color)` }}>
-            <GraduationCap size={40} /> Education
+          <h1 style={{ fontFamily: "'Italiana', serif", fontSize: "clamp(2.8rem, 6vw, 4.5rem)", color: "var(--text-primary)", lineHeight: 1 }}>
+            Education
           </h1>
         </motion.div>
-
         {/* Timeline */}
         <div className="relative space-y-6 mb-16">
           <div

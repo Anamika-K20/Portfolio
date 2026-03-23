@@ -42,15 +42,15 @@ export default function CodingPage() {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-14"
+          className="mb-14"
         >
-          <p className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: `var(--accent-color)` }}>
-            COMPETITIVE PROGRAMMING
+          <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.55rem", letterSpacing: "0.35em", color: "var(--accent-color)", textTransform: "uppercase", marginBottom: "0.8rem" }}>
+            Competitive Programming
           </p>
-          <h1 className="text-4xl md:text-5xl font-bold" style={{ color: `var(--accent-color)` }}>
+          <h1 style={{ fontFamily: "'Italiana', serif", fontSize: "clamp(2.8rem, 6vw, 4.5rem)", color: "var(--text-primary)", lineHeight: 1, marginBottom: "0.5rem" }}>
             Coding Profiles
           </h1>
-          <p className="mt-3" style={{ color: `var(--text-secondary)` }}>
+          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem", fontStyle: "italic", color: "var(--text-secondary)" }}>
             Where I grind, compete, and occasionally cry over edge cases
           </p>
         </motion.div>

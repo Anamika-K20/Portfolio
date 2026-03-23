@@ -70,33 +70,25 @@ export default function ResearchPage() {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-14"
+          className="mb-14"
         >
-          <span className="section-label block mb-3">ACADEMIC CONTRIBUTIONS</span>
-          <h1
-            className="text-4xl md:text-5xl font-bold mb-4"
-            style={{ fontFamily: "var(--font-display)", color: `var(--text-primary)` }}
-          >
-            Research &{" "}
-            <span className="text-transparent bg-clip-text" style={{ backgroundImage: "var(--gradient-1)" }}>
-              Publications
-            </span>
-          </h1>
-          <p className="text-base mb-6" style={{ color: `var(--text-secondary)` }}>
-            Peer-reviewed papers in AI, ML, and emerging technologies
+          <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.55rem", letterSpacing: "0.35em", color: "var(--accent-color)", textTransform: "uppercase", marginBottom: "0.8rem" }}>
+            Academic Contributions
           </p>
+          <h1 style={{ fontFamily: "'Italiana', serif", fontSize: "clamp(2.8rem, 6vw, 4.5rem)", color: "var(--text-primary)", lineHeight: 1, marginBottom: "1.5rem" }}>
+            Research & Publications
+          </h1>
 
           {/* Google Scholar CTA */}
           <motion.a
             href="https://scholar.google.com/citations?user=TGnqdokAAAAJ&hl=en&authuser=3"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.04, boxShadow: "var(--glow)" }}
-            whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm text-white"
-            style={{ background: "var(--gradient-1)" }}
+            whileHover={{ x: 3 }}
+            className="inline-flex items-center gap-2 text-sm font-semibold"
+            style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.52rem", letterSpacing: "0.12em", color: "var(--accent-color)", textTransform: "uppercase" }}
           >
-            <ExternalLink size={15} /> View Google Scholar Profile
+            View Google Scholar Profile <ExternalLink size={12} />
           </motion.a>
         </motion.div>
 

@@ -9,9 +9,8 @@ const navItems = [
   { label: "Projects", path: "/projects" },
   { label: "Skills", path: "/skills" },
   { label: "Research", path: "/research" },
-  { label: "Resume", path: "/resume" },
   { label: "Education", path: "/education" },
-  { label: "Positions of Responsibility", path: "/extracurricular" },
+  { label: "Positions", path: "/extracurricular" },
   { label: "Coding", path: "/coding" },
   { label: "Contact", path: "/contact" },
 ];
@@ -121,6 +120,17 @@ export const Navbar = () => {
                 <Icon size={16} />
               </motion.a>
             ))}
+            <motion.a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              className="ml-1 px-3 py-1.5 rounded-lg text-xs font-semibold border"
+              style={{ borderColor: "var(--accent-color)", color: "var(--accent-color)", fontFamily: "'Space Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.08em" }}
+            >
+              Resume
+            </motion.a>
             <motion.button
               whileHover={{ scale: 1.1, rotate: 15 }}
               whileTap={{ scale: 0.9 }}

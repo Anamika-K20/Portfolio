@@ -167,7 +167,7 @@ export default function ContactPage() {
                 </p>
               </div>
               <p className="text-xs" style={{ color: `var(--text-secondary)` }}>
-                Currently looking for full-time roles and interesting projects starting mid-2026.
+                Currently looking for full-time roles and interesting projects.
               </p>
             </motion.div>
           </div>
