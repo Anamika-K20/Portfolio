@@ -5,7 +5,6 @@ import { Link, useLocation } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 
 const navItems = [
-  { label: "About", path: "/about" },
   { label: "Experience", path: "/experience" },
   { label: "Projects", path: "/projects" },
   { label: "Skills", path: "/skills" },
