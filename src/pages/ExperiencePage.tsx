@@ -30,35 +30,23 @@ const experiences: Experience[] = [
     ],
     tech: ["LLMs", "FAISS", "PyMuPDF", "FastAPI", "Angular", "Python", "RAG"],
     certificate: "/internshipcompletioncertificate.pdf",
+    logo: "/citilogo.png",
   },
   {
     role: "Research Intern",
-    company: "IGDTUW",
+    company: "Centre of Excellence – Artificial Intelligence, IGDTUW",
     location: "Delhi, India",
-    period: "Jan 2024 – May 2024",
+    period: "Jul 2023 – Nov 2024",
     type: "Research",
     accentColor: "#c084fc",
     points: [
-      "Conducted research on speaker identification using classical ML algorithms — SVM, KNN, Random Forest.",
-      "Extracted acoustic features (MFCCs, spectral centroid) and benchmarked model performance across noise conditions.",
-      "Co-authored a paper published at IEEE Confluence 2024 with 3 citations.",
+      "Mentored by Dr. Ritu Rani.",
+      "Published 'Sentiment-Driven Music Recommendations: A Comparative Study of ML Algorithms and Chatbot Implementation' at GCITC 2024 (April 18, 2024).",
+      "Published 'Integrating Facial Expression Recognition for Emotion Responsive Music Recommendations' at ICEC 2024 (November 23, 2024).",
     ],
-    tech: ["Python", "Scikit-learn", "Librosa", "MFCC", "IEEE Publication"],
+    tech: ["Python", "Scikit-learn", "NLP", "Sentiment Analysis", "Facial Expression Recognition", "ML"],
   },
-  {
-    role: "Frontend Developer Intern",
-    company: "Twinfusion Innovations",
-    location: "Remote",
-    period: "Aug 2023 – Dec 2023",
-    type: "Internship",
-    accentColor: "#f5c842",
-    points: [
-      "Built the frontend for a digital twin platform used in power project management using ReactJS.",
-      "Integrated time-series forecasting visualizations (Prophet, ARIMAX) into the dashboard.",
-      "Implemented LSTM-based anomaly detection alerts with 91% accuracy, surfaced in real-time UI components.",
-    ],
-    tech: ["ReactJS", "FastAPI", "Prophet", "ARIMAX", "LSTM", "Data Visualization"],
-  },
+
 ];
 
 export default function ExperiencePage() {
@@ -141,6 +129,9 @@ export default function ExperiencePage() {
                         {exp.role}
                       </h2>
                       <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                        {exp.logo && (
+                          <img src={exp.logo} alt={exp.company} style={{ width: "28px", height: "28px", objectFit: "contain", borderRadius: "4px" }} />
+                        )}
                         <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1rem", fontWeight: 600, color: exp.accentColor }}>
                           {exp.company}
                         </span>
