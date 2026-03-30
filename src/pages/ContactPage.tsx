@@ -193,7 +193,7 @@ export default function ContactPage() {
                   name="name"
                   value={form.name}
                   onChange={handleChange}
-                  placeholder="Jane Doe"
+                  placeholder="Your name"
                   required
                   style={inputStyle}
                   onFocus={(e) => (e.target.style.borderColor = "var(--accent-color)")}
@@ -209,7 +209,7 @@ export default function ContactPage() {
                   name="email"
                   value={form.email}
                   onChange={handleChange}
-                  placeholder="jane@example.com"
+                  placeholder="your@email.com"
                   required
                   style={inputStyle}
                   onFocus={(e) => (e.target.style.borderColor = "var(--accent-color)")}

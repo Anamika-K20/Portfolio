@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "./context/ThemeContext";
 import Home from "./pages/Home";
 import ProjectsPage from "./pages/ProjectsPage";
@@ -31,6 +32,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route path="/research" element={<ResearchPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/experience" element={<ExperiencePage />} />        </Routes>
+        <Analytics />
       </Router>
     </ThemeProvider>
   </React.StrictMode>,
