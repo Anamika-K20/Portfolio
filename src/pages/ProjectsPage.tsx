@@ -19,7 +19,19 @@ const projects = [
     featured: true,
   },
   {
-    title: "MediFam Connect",
+    title: "TrueDeal",
+    subtitle: "Price Intelligence · E-Commerce",
+    description:
+      "Detects fake discounts on Amazon by tracking price history, analyzing trends, and scoring deal authenticity. Paste any Amazon URL to get an instant verdict — Great Deal to Overpriced. Background scheduler re-scrapes all tracked products every 12 hours.",
+    tech: ["React", "FastAPI", "Python", "Web Scraping", "Price Tracking"],
+    github: "#",
+    link: "https://true-deal.vercel.app/",
+    emoji: "🔍",
+    color: "#67e8f9",
+    stat: { label: "Deal verdict accuracy", value: "ML-based", bar: 0.85 },
+    year: "2025",
+    featured: false,
+  },
     subtitle: "Health Tech · Web App",
     description:
       "ReactJS-based web application for family health record management, including lab tests, medication tracking, and reminders. Age and gender-specific interface for health data visualization.",
