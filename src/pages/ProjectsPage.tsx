@@ -32,6 +32,8 @@ const projects = [
     year: "2025",
     featured: false,
   },
+  {
+    title: "MediFam Connect",
     subtitle: "Health Tech · Web App",
     description:
       "ReactJS-based web application for family health record management, including lab tests, medication tracking, and reminders. Age and gender-specific interface for health data visualization.",
@@ -39,7 +41,7 @@ const projects = [
     github: "#",
     link: "#",
     emoji: "🏥",
-    color: "#67e8f9",
+    color: "#4ade80",
     stat: { label: "User satisfaction", value: "88%", bar: 0.88 },
     year: "2023",
     featured: false,
