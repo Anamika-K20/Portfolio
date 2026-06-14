@@ -8,10 +8,8 @@ const navItems = [
   { label: "Experience", path: "/experience" },
   { label: "Projects", path: "/projects" },
   { label: "Skills", path: "/skills" },
+  { label: "Leadership", path: "/extracurricular" },
   { label: "Research", path: "/research" },
-  { label: "Education", path: "/education" },
-  { label: "Positions", path: "/extracurricular" },
-  { label: "Coding", path: "/coding" },
   { label: "Contact", path: "/contact" },
 ];
 
@@ -42,7 +40,7 @@ export const Navbar = () => {
       }}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-18">
 
           {/* Logo */}
           <Link to="/">
@@ -52,13 +50,13 @@ export const Navbar = () => {
             >
               {/* Custom logo mark — rose petal / A monogram */}
               <div
-                className="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-black text-white relative overflow-hidden"
+                className="w-9 h-9 rounded-lg flex items-center justify-center text-sm font-black text-white relative overflow-hidden"
                 style={{ background: "var(--gradient-1)" }}
               >
-                <span style={{ fontFamily: "'Italiana', serif", fontSize: "1rem", letterSpacing: "-0.02em" }}>A</span>
+                <span style={{ fontFamily: "'Italiana', serif", fontSize: "1.2rem", letterSpacing: "-0.02em" }}>A</span>
               </div>
               <span
-                className="text-base font-bold tracking-tight"
+                className="text-lg font-bold tracking-tight"
                 style={{ fontFamily: "var(--font-display)", color: `var(--text-primary)` }}
               >
                 Anamika
@@ -74,10 +72,11 @@ export const Navbar = () => {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className="relative px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors duration-200"
+                  className="relative px-4 py-2 text-sm font-semibold rounded-lg transition-colors duration-200"
                   style={{
                     color: active ? `var(--accent-color)` : `var(--text-secondary)`,
                     backgroundColor: active ? `var(--accent-light)` : "transparent",
+                    letterSpacing: "0.01em",
                   }}
                 >
                   <motion.span
@@ -117,7 +116,7 @@ export const Navbar = () => {
                 style={{ color: `var(--text-tertiary)` }}
                 title={label}
               >
-                <Icon size={16} />
+                <Icon size={20} />
               </motion.a>
             ))}
             <motion.a
@@ -127,7 +126,7 @@ export const Navbar = () => {
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
               className="ml-1 px-3 py-1.5 rounded-lg text-xs font-semibold border"
-              style={{ borderColor: "var(--accent-color)", color: "var(--accent-color)", fontFamily: "'Space Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.08em" }}
+              style={{ borderColor: "var(--accent-color)", color: "var(--accent-color)", fontFamily: "'Space Mono', monospace", fontSize: "0.62rem", letterSpacing: "0.08em" }}
             >
               Resume
             </motion.a>
@@ -142,7 +141,7 @@ export const Navbar = () => {
                 borderColor: `var(--border-color)`,
               }}
             >
-              {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
+              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
             </motion.button>
           </div>
 
@@ -158,7 +157,7 @@ export const Navbar = () => {
                 borderColor: `var(--border-color)`,
               }}
             >
-              {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
+              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
             </motion.button>
             <motion.button
               whileTap={{ scale: 0.9 }}

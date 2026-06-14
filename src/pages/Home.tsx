@@ -102,7 +102,7 @@ function CyclingTagline() {
   return (
     <AnimatePresence mode="wait">
       <motion.p key={idx} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.3 }}
-        style={{ fontFamily: "'Space Mono', monospace", fontSize: "clamp(0.6rem, 1.1vw, 0.78rem)", color: "var(--accent-color)", letterSpacing: "0.06em", minHeight: "1.4em" }}>
+        style={{ fontFamily: "'Space Mono', monospace", fontSize: "clamp(0.72rem, 1.32vw, 0.94rem)", color: "var(--accent-color)", letterSpacing: "0.06em", minHeight: "1.4em", fontWeight: 700, opacity: 1 }}>
         {text}
       </motion.p>
     </AnimatePresence>
@@ -127,13 +127,6 @@ function FloatingOrbs() {
     </div>
   );
 }
-
-/* ── Trait pills (static, below photo) ──────────────────── */
-const TRAITS = [
-  { label: "ML Engineer", color: "var(--accent-color)" },
-  { label: "Software Developer", color: "var(--accent-secondary)" },
-  { label: "Researcher", color: "var(--accent-tertiary)" },
-];
 
 /* ── 3D photo tilt ───────────────────────────────────────── */
 function use3DTilt(intensity = 12) {
@@ -167,7 +160,7 @@ export default function Home() {
 
           {/* LEFT — photo */}
           <motion.div
-            className="relative lg:w-[46%] flex-shrink-0 flex items-center justify-center"
+            className="relative lg:w-[48%] flex-shrink-0 flex items-center justify-center"
             style={{ minHeight: "50vh" }}
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -179,9 +172,9 @@ export default function Home() {
 
             <div className="relative py-20 lg:py-0 flex flex-col items-center gap-5">
               {/* Photo */}
-              <div style={{ position: "relative", width: "clamp(220px, 24vw, 300px)", height: "clamp(280px, 32vw, 400px)" }}>
+              <div style={{ position: "relative", width: "clamp(240px, 27vw, 340px)", height: "clamp(310px, 36vw, 450px)" }}>
                 {/* Glow */}
-                <div style={{ position: "absolute", inset: 0, borderRadius: "12px", background: "var(--gradient-1)", filter: "blur(50px)", opacity: 0.15, transform: "scale(0.9) translateY(16px)", zIndex: -1 }} />
+                <div style={{ position: "absolute", inset: 0, borderRadius: "12px", background: "var(--gradient-1)", filter: "blur(60px)", opacity: 0.25, transform: "scale(0.95) translateY(20px)", zIndex: -1 }} />
 
                 {/* Corner brackets */}
                 {[
@@ -199,28 +192,43 @@ export default function Home() {
                   animate={{ y: [0, -6, 0] }}
                   transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                   ref={photoTilt.ref}
-                  style={{ width: "100%", height: "100%", borderRadius: "10px", overflow: "hidden", border: "1px solid var(--border-color)", ...photoTilt.style }}
+                  style={{ width: "100%", height: "100%", borderRadius: "10px", overflow: "visible", ...photoTilt.style }}
                   onMouseMove={photoTilt.onMouseMove}
                   onMouseLeave={photoTilt.onMouseLeave}
-                  whileHover={{ boxShadow: "0 20px 60px rgba(255, 148, 114, 0.25)" }}
                 >
-                  <img
-                    src="/profile.png"
-                    alt="Anamika Kumari"
-                    style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
-                  />
+                  {/* Animated gradient border on hover */}
+                  <motion.div
+                    className="group"
+                    whileHover="hovered"
+                    style={{ width: "100%", height: "100%", borderRadius: "10px", position: "relative", padding: "1.5px" }}
+                  >
+                    <motion.div
+                      variants={{
+                        hovered: { opacity: 1 },
+                        default: { opacity: 0 },
+                      }}
+                      initial="default"
+                      style={{
+                        position: "absolute", inset: 0, borderRadius: "10px",
+                        background: "linear-gradient(135deg, var(--accent-color), var(--accent-secondary), var(--accent-tertiary), var(--accent-color))",
+                        backgroundSize: "300% 300%",
+                        transition: "opacity 0.3s ease",
+                        zIndex: 0,
+                      }}
+                      animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+                      transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                    />
+                    <div style={{ position: "relative", zIndex: 1, width: "100%", height: "100%", borderRadius: "9px", overflow: "hidden", border: "1px solid var(--border-color)", background: "var(--bg-primary)" }}>
+                      <img
+                        src="/profile.png"
+                        alt="Anamika Kumari"
+                        style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block" }}
+                      />
+                    </div>
+                  </motion.div>
                 </motion.div>
               </div>
 
-              {/* Trait pills below photo */}
-              <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.2, duration: 0.6 }}
-                style={{ display: "flex", gap: "8px", flexWrap: "wrap", justifyContent: "center" }}>
-                {TRAITS.map((t) => (
-                  <span key={t.label} style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.48rem", letterSpacing: "0.12em", color: t.color, backgroundColor: t.color + "14", border: `1px solid ${t.color}33`, borderRadius: "999px", padding: "4px 12px" }}>
-                    {t.label}
-                  </span>
-                ))}
-              </motion.div>
             </div>
           </motion.div>
 
@@ -229,7 +237,7 @@ export default function Home() {
             initial={{ scaleY: 0 }} animate={{ scaleY: 1 }}
             transition={{ delay: 0.4, duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
             className="absolute top-16 bottom-0 hidden lg:block"
-            style={{ left: "46%", width: "1px", background: "linear-gradient(to bottom, transparent, var(--border-color) 20%, var(--border-color) 80%, transparent)", transformOrigin: "top", zIndex: 5 }}
+            style={{ left: "48%", width: "1px", background: "linear-gradient(to bottom, transparent, var(--border-color) 20%, var(--border-color) 80%, transparent)", transformOrigin: "top", zIndex: 5 }}
           />
 
           {/* RIGHT — text */}
@@ -246,7 +254,7 @@ export default function Home() {
             </motion.p>
 
             {/* Name */}
-            <div style={{ lineHeight: 0.92, marginBottom: "0.1em" }}>
+            <div style={{ lineHeight: 0.78, marginBottom: "0.1em" }}>
               <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.38, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                 style={{ fontFamily: "'Italiana', serif", fontSize: "clamp(3.8rem, 9vw, 8rem)", letterSpacing: "-0.02em", background: "var(--gradient-1)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                 Anamika
@@ -257,9 +265,18 @@ export default function Home() {
               </motion.h1>
             </div>
 
+            {/* Roles line */}
+            <motion.p initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.6 }}
+              style={{ fontFamily: "'Space Mono', monospace", fontSize: "clamp(0.5rem, 0.9vw, 0.65rem)", letterSpacing: "0.18em", color: "var(--text-tertiary)", textTransform: "uppercase", marginBottom: "0.5rem" }}>
+              <span style={{ color: "var(--accent-color)" }}>AI Engineer</span>
+              {" • "}
+              <span style={{ color: "var(--accent-secondary)" }}>Software Developer</span>
+              {" • "}
+              <span style={{ color: "var(--accent-tertiary)" }}>Researcher</span>
+            </motion.p>
+
             {/* Animated line */}
-            <div className="relative my-6 h-px w-36 origin-left">
-              <motion.div initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: 0.9, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            <div className="relative my-6 h-px w-36 origin-left">              <motion.div initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: 0.9, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                 className="absolute inset-0" style={{ background: "var(--gradient-1)" }} />
               <motion.div className="absolute top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "var(--accent-color)" }}
                 animate={{ x: [0, 136, 0] }} transition={{ delay: 1.8, duration: 2.8, repeat: Infinity, ease: "easeInOut" }} />
@@ -269,13 +286,18 @@ export default function Home() {
             <CyclingTagline />
 
             {/* Bio */}
-            <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.0, duration: 0.7 }}
-              className="mt-5 max-w-sm leading-relaxed"
-              style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1rem, 1.4vw, 1.1rem)", fontStyle: "italic", color: "var(--text-secondary)" }}>
-              I build ML systems and ship software. B.Tech (ECE-AI) Graduate, Class of 2026,
-              IGDTUW — from React frontends to FastAPI backends to RAG
-              pipelines, and asking "why is the loss still going up" at 2am.
-            </motion.p>
+            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.0, duration: 0.7 }}
+              className="mt-5 max-w-sm" style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+              <p style={{ fontFamily: "'Italiana', serif", fontSize: "clamp(1.15rem, 1.8vw, 1.35rem)", color: "var(--text-primary)", lineHeight: 1.3 }}>
+                Engineer by training, builder by instinct.
+              </p>
+              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(0.95rem, 1.3vw, 1.05rem)", fontStyle: "italic", color: "var(--text-secondary)", lineHeight: 1.75 }}>
+                I build intelligent products where AI meets software engineering. I believe in ownership, thoughtful execution, and finishing what I start.
+              </p>
+              <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "clamp(0.5rem, 0.8vw, 0.62rem)", letterSpacing: "0.12em", color: "var(--accent-color)", textTransform: "uppercase", marginTop: "0.2rem" }}>
+                Part-time reader &nbsp;·&nbsp; Part-time developer
+              </p>
+            </motion.div>
 
             {/* Status badge */}
             <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.4, type: "spring" }}
@@ -301,40 +323,50 @@ export default function Home() {
               Who I am
             </p>
             <h2 style={{ fontFamily: "'Italiana', serif", fontSize: "clamp(2.4rem, 5vw, 3.8rem)", color: "var(--text-primary)", lineHeight: 1 }}>
-              About Me
-            </h2>
+              The Engineer Behind the Work</h2>
           </motion.div>
 
           {/* Intro paragraphs */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "1.4rem", maxWidth: "720px", marginBottom: "3.5rem" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "1.4rem", maxWidth: "60ch", marginBottom: "3.5rem" }}>
             <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
               style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.1rem, 1.8vw, 1.3rem)", fontStyle: "italic", color: "var(--text-primary)", lineHeight: 1.75 }}>
-              B.Tech (ECE-AI) Graduate, Class of 2026, from Indira Gandhi Delhi Technical University for Women. I own things end-to-end — the frontend, the backend, the model, and the part where it actually has to work in production.
+              I take ownership end-to-end — from frontend interfaces and backend systems to machine learning models and production deployment. I care about building systems that don’t just work in demos, but remain reliable in production.
             </motion.p>
             <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.15 }}
               style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem", color: "var(--text-secondary)", lineHeight: 1.8 }}>
-              I've built RAG pipelines at Citi Bank, shipped a full-stack digital twin platform at Twinfusion, and published 5 papers across IEEE and Springer. My stack goes from React and FastAPI to LangChain, FAISS, and computer vision — whatever the problem needs. I don't specialize in one layer. I specialize in getting the whole thing working.
+              My work spans industry, research, and product engineering. I've built RAG pipelines at Citi, developed a full-stack digital twin platform at Twinfusion, and published 5 research papers across IEEE and Springer.
+            </motion.p>
+            <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.18 }}
+              style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem", color: "var(--text-secondary)", lineHeight: 1.8 }}>
+              My toolkit spans React, FastAPI, LangChain, FAISS, and computer vision — but I don't specialize in one layer. I specialize in getting the whole thing working.
             </motion.p>
             <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
               style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem", color: "var(--text-secondary)", lineHeight: 1.8 }}>
-              Right now I'm deep in LLMs and retrieval systems — specifically the gap between "it works in a notebook" and "it works at 3am when no one's watching." That's the problem I find interesting.
+              Right now, I’m deeply interested in LLMs and retrieval systems — especially the gap between a model that works in a notebook and one that reliably serves real users in production. That gap is where the real engineering begins.
             </motion.p>
           </div>
 
           {/* Stats */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))", gap: "1rem", marginBottom: "3.5rem" }}>
+            style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: "1rem", marginBottom: "3.5rem" }}>
             {[
-              { value: "5", label: "Research Papers", sub: "IEEE & Springer" },
-              { value: "10+", label: "Citations", sub: "Google Scholar" },
-              { value: "3", label: "Internships", sub: "Industry & Research" },
-              { value: "8.85", label: "CGPA", sub: "IGDTUW" },
+              { value: "5", label: "Research Papers", sub: "IEEE & Springer", color: "#ff9472" },
+              { value: "10+", label: "Citations", sub: "Google Scholar", color: "#d580ff" },
+              { value: "3", label: "Internships", sub: "Industry & Research", color: "#5eead4" },
+              { value: "8+", label: "Leadership Roles", sub: "IEEE & Beyond", color: "#fcd34d" },
             ].map((h, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-                style={{ backgroundColor: "var(--bg-card)", border: "1px solid var(--border-color)", borderRadius: "14px", padding: "1.4rem", textAlign: "center" }}>
-                <p style={{ fontFamily: "'Italiana', serif", fontSize: "2.4rem", color: "var(--accent-color)", lineHeight: 1 }}>{h.value}</p>
-                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", color: "var(--text-primary)", marginTop: "4px" }}>{h.label}</p>
-                <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.44rem", letterSpacing: "0.1em", color: "var(--text-tertiary)", textTransform: "uppercase", marginTop: "3px" }}>{h.sub}</p>
+                whileHover={{ y: -4, boxShadow: `0 8px 32px ${h.color}22` }}
+                style={{ backgroundColor: "var(--bg-card)", border: "1px solid var(--border-color)", borderRadius: "16px", overflow: "hidden", position: "relative" }}>
+                {/* Top accent bar */}
+                <div style={{ height: "3px", background: `linear-gradient(90deg, ${h.color}, transparent)` }} />
+                <div style={{ padding: "1.4rem 1.2rem" }}>
+                  <p style={{ fontFamily: "'Italiana', serif", fontSize: "3rem", color: h.color, lineHeight: 1, marginBottom: "6px" }}>{h.value}</p>
+                  <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1rem", fontWeight: 600, color: "var(--text-primary)", marginBottom: "2px" }}>{h.label}</p>
+                  <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.42rem", letterSpacing: "0.1em", color: "var(--text-tertiary)", textTransform: "uppercase" }}>{h.sub}</p>
+                </div>
+                {/* Subtle glow */}
+                <div style={{ position: "absolute", bottom: "-20px", right: "-20px", width: "80px", height: "80px", borderRadius: "50%", background: h.color, filter: "blur(30px)", opacity: 0.12, pointerEvents: "none" }} />
               </motion.div>
             ))}
           </motion.div>
