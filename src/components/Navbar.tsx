@@ -40,7 +40,7 @@ export const Navbar = () => {
       }}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
-        <div className="flex justify-between items-center h-18">
+        <div className="flex justify-between items-center h-16">
 
           {/* Logo */}
           <Link to="/">
