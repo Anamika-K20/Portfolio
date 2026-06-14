@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Navbar } from "./Navbar";
+import { ScrollProgress } from "./ScrollProgress";
 
 interface PageLayoutProps {
   children: React.ReactNode;
@@ -8,6 +9,7 @@ interface PageLayoutProps {
 export const PageLayout = ({ children }: PageLayoutProps) => {
   return (
     <div className="min-h-screen relative" style={{ backgroundColor: `var(--bg-primary)` }}>
+      <ScrollProgress />
       {/* Ambient background orbs */}
       <div
         className="orb w-96 h-96 top-0 right-0 opacity-30"

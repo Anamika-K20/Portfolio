@@ -1,7 +1,53 @@
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { Github, ArrowUpRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { PageLayout } from "../components/PageLayout";
+
+/* ── 3D Tilt hook ── */
+function use3DTilt(intensity = 10) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [style, setStyle] = useState({ transform: "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)", transition: "transform 0.15s ease-out" });
+  const onMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const el = ref.current; if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    setStyle({ transform: `perspective(1000px) rotateX(${-y * intensity}deg) rotateY(${x * intensity}deg) scale(1.015)`, transition: "transform 0.1s ease-out" });
+  }, [intensity]);
+  const onMouseLeave = useCallback(() => {
+    setStyle({ transform: "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)", transition: "transform 0.5s ease-out" });
+  }, []);
+  return { ref, style, onMouseMove, onMouseLeave };
+}
+
+/* ── Animated counter ── */
+function AnimatedValue({ value, color }: { value: string; color: string }) {
+  const ref = useRef<HTMLParagraphElement>(null);
+  const inView = useInView(ref, { once: true });
+  const num = parseFloat(value.replace(/[^0-9.]/g, ""));
+  const suffix = value.replace(/[0-9.]/g, "");
+  const [display, setDisplay] = useState("0");
+
+  useEffect(() => {
+    if (!inView || isNaN(num)) { setDisplay(value); return; }
+    let start = 0;
+    const duration = 1200;
+    const step = 16;
+    const increment = num / (duration / step);
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= num) { setDisplay(value); clearInterval(timer); return; }
+      setDisplay((num < 2 ? start.toFixed(1) : Math.floor(start).toString()) + suffix);
+    }, step);
+    return () => clearInterval(timer);
+  }, [inView, num, value, suffix]);
+
+  return (
+    <p ref={ref} style={{ fontFamily: "'Italiana', serif", fontSize: "2.2rem", color, lineHeight: 1 }}>
+      {display}
+    </p>
+  );
+}
 
 const projects = [
   {
@@ -41,7 +87,7 @@ const projects = [
     emoji: "🗺️",
     color: "#e8927c",
     stat: { label: "Recommendation engine", value: "AI-based", bar: 0.88 },
-    year: "2025",
+    year: "2026",
   },
   {
     title: "MediFam Connect",
@@ -89,15 +135,21 @@ function StatBar({ value, color }: { value: number; color: string }) {
 /* ── PROJECT CARD ── */
 function ProjectCard({ project, index }: { project: typeof projects[0]; index: number }) {
   const [hovered, setHovered] = useState(false);
+  const tilt = use3DTilt(8);
 
   return (
+    <div
+      ref={tilt.ref}
+      style={{ ...tilt.style }}
+      onMouseMove={tilt.onMouseMove}
+      onMouseLeave={() => { tilt.onMouseLeave(); setHovered(false); }}
+      onMouseEnter={() => setHovered(true)}
+    >
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.7, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-      onHoverStart={() => setHovered(true)}
-      onHoverEnd={() => setHovered(false)}
       className="relative rounded-2xl overflow-hidden"
       style={{ border: `1px solid var(--border-color)`, backgroundColor: "var(--bg-secondary)" }}
     >
@@ -166,7 +218,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
         <div className="flex flex-col gap-5 md:w-56 w-full flex-shrink-0">
           {/* Stat */}
           <div style={{ padding: "1.2rem", backgroundColor: "var(--bg-card)", borderRadius: "12px", border: "1px solid var(--border-color)" }}>
-            <p style={{ fontFamily: "'Italiana', serif", fontSize: "2.2rem", color: project.color, lineHeight: 1 }}>{project.stat.value}</p>
+            <AnimatedValue value={project.stat.value} color={project.color} />
             <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.12em", color: "var(--text-tertiary)", textTransform: "uppercase", marginTop: "4px", marginBottom: "10px" }}>{project.stat.label}</p>
             <StatBar value={project.stat.bar} color={project.color} />
           </div>
@@ -201,6 +253,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
         </div>
       </div>
     </motion.div>
+    </div>
   );
 }
 

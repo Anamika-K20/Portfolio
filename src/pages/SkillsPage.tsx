@@ -1,5 +1,46 @@
 import { motion } from "framer-motion";
+import { useRef, useCallback, useState } from "react";
 import { PageLayout } from "../components/PageLayout";
+
+function use3DTilt(intensity = 15) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [style, setStyle] = useState({ transform: "perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)", transition: "transform 0.15s ease-out" });
+  const onMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const el = ref.current; if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    setStyle({ transform: `perspective(600px) rotateX(${-y * intensity}deg) rotateY(${x * intensity}deg) scale(1.08)`, transition: "transform 0.1s ease-out" });
+  }, [intensity]);
+  const onMouseLeave = useCallback(() => {
+    setStyle({ transform: "perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)", transition: "transform 0.4s ease-out" });
+  }, []);
+  return { ref, style, onMouseMove, onMouseLeave };
+}
+
+function SkillCard({ skill }: { skill: { name: string; logo: string; color: string; note?: string } }) {
+  const tilt = use3DTilt(15);
+  return (
+    <div ref={tilt.ref} style={tilt.style} onMouseMove={tilt.onMouseMove} onMouseLeave={tilt.onMouseLeave}>
+      <motion.div
+        whileHover={{ boxShadow: `0 0 20px ${skill.color}55` }}
+        className="flex flex-col items-center gap-2 p-4 rounded-xl border cursor-pointer relative overflow-hidden group"
+        style={{ backgroundColor: `var(--bg-secondary)`, borderColor: `${skill.color}30`, minWidth: "80px" }}
+      >
+        <motion.div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity"
+          style={{ background: `radial-gradient(circle, ${skill.color}25 0%, transparent 70%)` }} />
+        <div className="w-10 h-10 flex items-center justify-center relative z-10">
+          <img src={skill.logo} alt={skill.name} className="w-full h-full object-contain" loading="lazy"
+            style={{ filter: `drop-shadow(0 0 8px ${skill.color}80)` }} />
+        </div>
+        <p className="text-xs font-bold text-center relative z-10" style={{ color: skill.color }}>{skill.name}</p>
+        {skill.note && (
+          <p className="text-center relative z-10" style={{ fontSize: "0.4rem", letterSpacing: "0.08em", color: "var(--text-tertiary)", textTransform: "uppercase" }}>{skill.note}</p>
+        )}
+      </motion.div>
+    </div>
+  );
+}
 
 const skillCategories = [
   {
@@ -74,39 +115,7 @@ export default function SkillsPage() {
               </h2>
               <div className="flex flex-wrap gap-4">
                 {cat.skills.map((skill, i) => (
-                  <motion.div
-                    key={i}
-                    whileHover={{ scale: 1.12, y: -4 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex flex-col items-center gap-2 p-4 rounded-xl border cursor-pointer relative overflow-hidden group"
-                    style={{
-                      backgroundColor: `var(--bg-secondary)`,
-                      borderColor: `${skill.color}30`,
-                      minWidth: "80px",
-                    }}
-                  >
-                    <motion.div
-                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity"
-                      style={{ background: `radial-gradient(circle, ${skill.color}25 0%, transparent 70%)` }}
-                    />
-                    <div className="w-10 h-10 flex items-center justify-center relative z-10">
-                      <img
-                        src={skill.logo}
-                        alt={skill.name}
-                        className="w-full h-full object-contain"
-                        loading="lazy"
-                        style={{ filter: `drop-shadow(0 0 6px ${skill.color}60)` }}
-                      />
-                    </div>
-                    <p className="text-xs font-bold text-center relative z-10" style={{ color: skill.color }}>
-                      {skill.name}
-                    </p>
-                    {(skill as any).note && (
-                      <p className="text-center relative z-10" style={{ fontSize: "0.4rem", letterSpacing: "0.08em", color: "var(--text-tertiary)", textTransform: "uppercase" }}>
-                        {(skill as any).note}
-                      </p>
-                    )}
-                  </motion.div>
+                  <SkillCard key={i} skill={skill} />
                 ))}
               </div>
             </motion.div>

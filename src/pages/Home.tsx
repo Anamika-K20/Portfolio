@@ -1,8 +1,9 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { Navbar } from "../components/Navbar";
+import { ScrollProgress } from "../components/ScrollProgress";
 
 /* ── Particle canvas ─────────────────────────────────────── */
 function ParticleCanvas() {
@@ -134,10 +135,29 @@ const TRAITS = [
   { label: "Researcher", color: "var(--accent-tertiary)" },
 ];
 
+/* ── 3D photo tilt ───────────────────────────────────────── */
+function use3DTilt(intensity = 12) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [style, setStyle] = useState({ transform: "perspective(1000px) rotateX(0deg) rotateY(0deg)", transition: "transform 0.15s ease-out" });
+  const onMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const el = ref.current; if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    setStyle({ transform: `perspective(1000px) rotateX(${-y * intensity}deg) rotateY(${x * intensity}deg)`, transition: "transform 0.1s ease-out" });
+  }, [intensity]);
+  const onMouseLeave = useCallback(() => {
+    setStyle({ transform: "perspective(1000px) rotateX(0deg) rotateY(0deg)", transition: "transform 0.5s ease-out" });
+  }, []);
+  return { ref, style, onMouseMove, onMouseLeave };
+}
+
 /* ── Home ────────────────────────────────────────────────── */
 export default function Home() {
+  const photoTilt = use3DTilt(10);
   return (
     <div className="min-h-screen relative overflow-hidden" style={{ backgroundColor: "var(--bg-primary)" }}>
+      <ScrollProgress />
       <ParticleCanvas />
       <FloatingOrbs />
       <Navbar />
@@ -178,8 +198,11 @@ export default function Home() {
                 <motion.div
                   animate={{ y: [0, -6, 0] }}
                   transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                  style={{ width: "100%", height: "100%", borderRadius: "10px", overflow: "hidden", border: "1px solid var(--border-color)" }}
-                  whileHover={{ scale: 1.02 }}
+                  ref={photoTilt.ref}
+                  style={{ width: "100%", height: "100%", borderRadius: "10px", overflow: "hidden", border: "1px solid var(--border-color)", ...photoTilt.style }}
+                  onMouseMove={photoTilt.onMouseMove}
+                  onMouseLeave={photoTilt.onMouseLeave}
+                  whileHover={{ boxShadow: "0 20px 60px rgba(255, 148, 114, 0.25)" }}
                 >
                   <img
                     src="/profile.png"
@@ -249,7 +272,7 @@ export default function Home() {
             <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.0, duration: 0.7 }}
               className="mt-5 max-w-sm leading-relaxed"
               style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1rem, 1.4vw, 1.1rem)", fontStyle: "italic", color: "var(--text-secondary)" }}>
-              I build ML systems and ship software. Final-year ECE (AI) at
+              I build ML systems and ship software. B.Tech (ECE-AI) Graduate, Class of 2026,
               IGDTUW — from React frontends to FastAPI backends to RAG
               pipelines, and asking "why is the loss still going up" at 2am.
             </motion.p>
@@ -286,7 +309,7 @@ export default function Home() {
           <div style={{ display: "flex", flexDirection: "column", gap: "1.4rem", maxWidth: "720px", marginBottom: "3.5rem" }}>
             <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
               style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.1rem, 1.8vw, 1.3rem)", fontStyle: "italic", color: "var(--text-primary)", lineHeight: 1.75 }}>
-              Final-year ECE (AI) at IGDTUW. I own things end-to-end — the frontend, the backend, the model, and the part where it actually has to work in production.
+              B.Tech (ECE-AI) Graduate, Class of 2026, from Indira Gandhi Delhi Technical University for Women. I own things end-to-end — the frontend, the backend, the model, and the part where it actually has to work in production.
             </motion.p>
             <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.15 }}
               style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem", color: "var(--text-secondary)", lineHeight: 1.8 }}>
