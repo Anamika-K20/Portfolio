@@ -7,7 +7,7 @@ const education = [
     year: "2022 – 2026",
     degree: "B.Tech — Electronics & Communication Engineering - Artificial Intelligence",
     institute: "Indira Gandhi Delhi Technical University For Women",
-    score: "8.73 / 10.0",
+    score: "8.85 / 10.0",
     level: "Undergraduate",
     logo: "/igdtuw.png",
   },

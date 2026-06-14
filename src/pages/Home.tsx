@@ -305,7 +305,7 @@ export default function Home() {
               { value: "5", label: "Research Papers", sub: "IEEE & Springer" },
               { value: "10+", label: "Citations", sub: "Google Scholar" },
               { value: "3", label: "Internships", sub: "Industry & Research" },
-              { value: "8.73", label: "CGPA", sub: "IGDTUW" },
+              { value: "8.85", label: "CGPA", sub: "IGDTUW" },
             ].map((h, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
                 style={{ backgroundColor: "var(--bg-card)", border: "1px solid var(--border-color)", borderRadius: "14px", padding: "1.4rem", textAlign: "center" }}>

@@ -33,6 +33,20 @@ const projects = [
     featured: false,
   },
   {
+    title: "Dilli Darshan",
+    subtitle: "AI Tourism · React Native",
+    description:
+      "AI-driven smart tourism platform for Delhi. Built personalized, context-aware recommendations for places and attractions using location intelligence, real-time proximity suggestions, and a local Ollama model for contextual recommendation workflows.",
+    tech: ["React Native", "Ollama", "APIs", "Location Intelligence"],
+    github: "https://github.com/advika31/DilliDarshan",
+    link: "#",
+    emoji: "🗺️",
+    color: "#f5c842",
+    stat: { label: "Recommendation engine", value: "AI-based", bar: 0.88 },
+    year: "2025",
+    featured: false,
+  },
+  {
     title: "MediFam Connect",
     subtitle: "Health Tech · Web App",
     description:

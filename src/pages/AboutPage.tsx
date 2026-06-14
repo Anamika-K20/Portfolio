@@ -7,7 +7,7 @@ const highlights = [
   { value: "5", label: "Research Papers", sub: "IEEE & Springer" },
   { value: "10+", label: "Citations", sub: "Google Scholar" },
   { value: "3", label: "Internships", sub: "Industry & Research" },
-  { value: "8.73", label: "CGPA", sub: "IGDTUW" },
+  { value: "8.85", label: "CGPA", sub: "IGDTUW" },
 ];
 
 const values = [
