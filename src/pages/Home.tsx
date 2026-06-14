@@ -378,7 +378,7 @@ export default function Home() {
               What I'm looking for
             </p>
             <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", color: "var(--text-secondary)", lineHeight: 1.85, fontStyle: "italic", maxWidth: "680px" }}>
-              I want to work on problems where the ML actually matters — not just a model bolted onto a product as an afterthought, but systems where the intelligence is the product. I'm drawn to teams that move fast, give engineers real ownership, and care about the craft of building. Startup or MNC, the size doesn't matter as much as whether the work is real and the people are honest about what they're trying to do.
+              I want to work on problems where machine learning is core to the product — not just an afterthought. I'm drawn to teams that move fast, value ownership, and care deeply about building useful things. Startup or enterprise matters less to me than meaningful work and strong engineering culture.
             </p>
           </motion.div>
 
@@ -391,12 +391,12 @@ export default function Home() {
               {[
                 { title: "I care about things that ship.", body: "Research is great. But I'm most energized when something I build actually runs in production and solves a real problem. That's the bar I hold myself to." },
                 { title: "I go deep before I go wide.", body: "Whether it's a new model architecture or a new codebase, I'd rather understand it properly than skim the surface. Depth first." },
-                { title: "I believe in building in public.", body: "Papers, projects, this portfolio — putting work out there is how you get better and how you find the right people to work with." },
+                { title: "I finish what I start.", body: "I value ownership and follow-through. I believe good work comes from staying accountable and seeing things through to completion." },
               ].map((v, i) => (
                 <motion.div key={i} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
                   style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: "2rem", padding: "1.5rem 0", borderBottom: "1px solid var(--border-color)", alignItems: "start" }}>
                   <p style={{ fontFamily: "'Italiana', serif", fontSize: "1.2rem", color: "var(--text-primary)", lineHeight: 1.3 }}>{v.title}</p>
-                  <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1rem", color: "var(--text-secondary)", lineHeight: 1.75, fontStyle: "italic" }}>{v.body}</p>
+                  <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem", color: "var(--text-primary)", lineHeight: 1.85, fontStyle: "italic" }}>{v.body}</p>
                 </motion.div>
               ))}
             </div>
